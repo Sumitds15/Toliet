@@ -1,5 +1,6 @@
 package com.example.localadmin.toiletsamadhan;
 
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -71,7 +72,6 @@ public class MyMapActivity extends AppCompatActivity implements
             mGoogleApiClient.disconnect();
         }
 
-
     }
 
     /**
@@ -99,8 +99,11 @@ public class MyMapActivity extends AppCompatActivity implements
             //If everything went fine lets get latitude and longitude
             currentLatitude = location.getLatitude();
             currentLongitude = location.getLongitude();
-
-            Toast.makeText(this, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(this,MapsActivity.class);
+            i.putExtra("lat",currentLatitude);
+            i.putExtra("long",currentLongitude);
+            startActivity(i);
+            finish();
         }
     }
 
@@ -142,7 +145,13 @@ public class MyMapActivity extends AppCompatActivity implements
         currentLatitude = location.getLatitude();
         currentLongitude = location.getLongitude();
         Log.d("Latitude="+currentLatitude,"Longitude="+currentLongitude);
-        Toast.makeText(this, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, currentLatitude + " WORKS " + currentLongitude + "", Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"onLocationChanged", Toast.LENGTH_LONG).show();
+        Intent i = new Intent(this,MapsActivity.class);
+        i.putExtra("lat",currentLatitude);
+        i.putExtra("long",currentLongitude);
+        startActivity(i);
+        finish();
     }
 }
 
